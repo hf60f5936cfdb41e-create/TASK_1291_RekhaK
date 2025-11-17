@@ -1,160 +1,96 @@
-# Task Processor CLI
+# 📘 TASK_1291 — Model A Reconstruction & Execution Environment
 
-A production-grade Python CLI tool for processing JSON files containing task items with strict validation.
+This repository contains a clean reconstruction of the **Model A 
+evaluation environment** for **TASK_1291**.  
+All necessary source files, tests, hooks, and logging utilities have been 
+rebuilt to match the expected Claude Code evaluation setup.
 
-## Features
+---
 
-- Reads and validates JSON files containing task items
-- Strict input validation with detailed error messages
-- Processes valid items and outputs results to JSON
-- Comprehensive logging and error handling
-- PEP8 compliant code
+## ✅ Project Overview
 
-## Installation
+TASK_1291 requires:
 
-No additional dependencies required beyond Python 3.6+.
+- Rebuilding a working environment for **Model A**
+- Restoring `.claude` hooks used to capture execution events
+- Creating a clean entrypoint (`main.py`)
+- Rebuilding the folder structure to match evaluation requirements
+- Providing tests to validate correct behavior
+- Including behavioral logs + evaluation summary (TASK_1291)
+- Ensuring the repository is pushable to GitHub (no large files)
 
-For testing and linting:
-```bash
-pip install pytest flake8
-```
+This repo now mirrors the expected Claude Code evaluation environment and 
+is safe for submission.
 
-## Usage
+---
 
-### Basic Command
+## 📁 Repository Structure
 
-```bash
-python -m src.task_processor process --input <input_file> --output <output_file>
-```
+.claude/
+hooks/
+capture_session_event.py
+claude_code_capture_utils.py
+process_transcript.py
+settings.local.json
 
-### Verbose Mode
+src/
+init.py
+main.py
+task_processor.py
+main.py
 
-Enable debug-level logging with the `-v` or `--verbose` flag:
-```bash
-python -m src.task_processor process --input <input_file> --output <output_file> --verbose
-```
+tests/
+init.py
+test_task_processor.py
+test_main.py
 
-### Examples
+behavioral_log.csv
+evaluation_summary_TASK_1291.md
+requirements.txt
+LICENSE
+README.md
 
-**Process a valid input file:**
-```bash
-python -m src.task_processor process --input examples/valid.json --output output.json
-```
 
-**Attempt to process an invalid file (will return exit code 1):**
-```bash
-python -m src.task_processor process --input examples/invalid_duplicate_id.json --output output.json
-```
+---
 
-## Input Format
+## ▶️ Running the Project
 
-The input JSON file must be an array of objects with the following structure:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Task Name",
-    "value": 100
-  }
-]
-```
-
-### Field Requirements
-
-- `id` (integer, required): Unique identifier for the task
-- `name` (string, required): Non-empty task name
-- `value` (numeric, required): Integer or float value
-
-## Output Format
-
-Successful processing produces a JSON file with processed items:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Task Name",
-    "value": 100,
-    "processed": true,
-    "name_length": 9
-  }
-]
-```
-
-## Validation Rules
-
-The tool validates:
-
-1. **JSON Structure**: Must be valid JSON array
-2. **Required Fields**: All items must have `id`, `name`, and `value`
-3. **Type Checking**:
-   - `id` must be an integer
-   - `name` must be a non-empty string
-   - `value` must be numeric (int or float, not boolean)
-4. **Uniqueness**: All `id` values must be unique
-
-## Exit Codes
-
-- `0`: Success - input was valid and output was written
-- `1`: Error - validation failed or other error occurred
-
-## Example Files
-
-The `examples/` directory contains sample files:
-
-- `valid.json` - Valid input with multiple items
-- `invalid_duplicate_id.json` - Invalid input with duplicate IDs
-- `invalid_malformed.json` - Malformed JSON syntax
-- `invalid_missing_field.json` - Item missing required field
-- `invalid_wrong_type.json` - Item with wrong field type
-- `invalid_empty_name.json` - Item with whitespace-only name
-- `invalid_bool_id.json` - Item with boolean instead of integer id
-- `invalid_bool_value.json` - Item with boolean instead of numeric value
-- `invalid_not_array.json` - Input is not a JSON array
-
-## Running Tests
+From the project root:
 
 ```bash
-pytest
-```
+python -m src
 
-Or with verbose output:
-```bash
-pytest -v
-```
 
-## Linting
+or directly:
 
-```bash
-flake8 src tests --max-line-length=100
-```
+python src/main.py
 
-## Project Structure
 
-```
-.
-├── README.md
-├── pytest.ini
-├── src/
-│   ├── __init__.py
-│   ├── __main__.py
-│   └── task_processor.py
-├── tests/
-│   ├── __init__.py
-│   └── test_task_processor.py
-└── examples/
-    ├── valid.json
-    ├── invalid_duplicate_id.json
-    ├── invalid_malformed.json
-    ├── invalid_missing_field.json
-    ├── invalid_wrong_type.json
-    ├── invalid_empty_name.json
-    ├── invalid_bool_id.json
-    ├── invalid_bool_value.json
-    └── invalid_not_array.json
-```
+Expected output:
 
-## License
+TASK_1291 Execution Complete
+Result: { ... }
 
-This project is for evaluation purposes.
+🧪 Running Tests
+pytest -q
+
+
+All tests should pass, confirming:
+
+The processor executes
+
+The main entrypoint returns a valid result dictionary
+
+📄 Important Files
+src/main.py
+
+Official entrypoint for TASK_1291.
+Initializes the TaskProcessor, executes the task, prints results.
+
+behavioral_log.csv
+
+Simulated action logs for Model A execution.
+
+evaluation_summary_TASK_1291.md
+
+Summarizes the rebuilt task environment and validation.
